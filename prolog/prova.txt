@@ -1,0 +1,110 @@
+Aluna: Letícia Melquíades dos Santos Medeiros
+[1]L= 6  [8]M = 6
+[2]E= 7  [9]E = 7
+[3]T= 3  [10]D = 8
+[4]I= 4  [11]E = 7
+[5]C= 4  [12]I = 4
+[6]I= 4  [13]R = 2
+[7]A= 2  [14]O = 5
+		 [15]S = 5
+%------------------------
+
+% QUESTÃO 1
+% Distribuição de apartamentos
+% 3ºAndar : 301 | 302 | 303 | 304 | 305
+% 2ºAndar : 201 | 202 | 203 | 204 | 205
+% 1ºAndar : 101 | 102 | 103 | 104 | 105
+
+apt(301,3,vazio,L).
+apt(302,3,fernanda,L).
+apt(303,3,vazio,O).
+apt(304,3,tiago,O).
+apt(305,3,vazio,O).
+apt(201,2,pedro,L).
+apt(202,2,joao,L).
+apt(203,2,vazio,O).
+apt(204,2,fabiana,O).
+apt(205,2,vazio,O).
+apt(101,1,ana,L).
+apt(102,1,vazio,L).
+apt(103,1,antonio,O).
+apt(104,1,vazio,O).
+apt(105,1,yara,O).
+
+numapt(X):- apt(X,3,vazio,L), write(X),write(" Apartamento ideal para Flávia").
+numapt(X):- not(apt(X,3,vazio,L)), write(X), write(" Apartamento não disponivel").
+
+%?- numapt(301).
+%?- numapt(102).
+
+%------------------------
+% QUESTÃO 2
+pessoa(ana,roma,madri).
+pessoa(maria,roma,madri).
+pessoa(emanuela,roma,portugal).
+pessoa(fabiola,roma,portugal).
+
+pessoa(pedro,egito,portugal).
+pessoa(joao,egito,madri).
+pessoa(joao,egito,portugal).
+pessoa(fabio,egito,madri).
+pessoa(paulo,egito,madri).
+
+%verificando para roma e portugal
+verify1(X):- pessoa(X,roma,portugal).
+
+% ?- verify1(emanuela).
+
+%verificando para egito e madri
+%verify2(X):- pessoa(X,egito,madri).
+% --------------------------------------
+% QUESTÃO 3
+
+pot(_,0,1).
+pot(B,E,P):- E1 is E - 1, pot(B,E1,R), P is B*R.
+
+termo(A1,Q,E,X):- pot(Q,E,R), X is A1 * R.
+
+progressao(0,A1,Q,C):- write(")").
+progressao(N,A1,Q,C):- write(A1), write(" "), N1 is N-1, A2 is A1, C1 is C + 1, termo(A2,Q,C1,X), progressao(N1,X,Q,C1). 
+
+pg(N,A1,Q):- write("("), write(" "), progressao(N,A1,Q,0).
+
+%?- pg(2,6,7).
+% --------------------------------------
+% QUESTÃO 4
+% trapezio fomado por altura 2, base maior 7 e menor 6.
+%  X
+% XX
+% XX
+% XX
+% XX
+% XX
+% XX
+
+
+coluna(0):- nl.
+coluna(X):- write("X"), X1 is X - 1, coluna(X1).
+
+espaço(0):- write(" ").
+espaço(X):- write(" "), X1 is X - 1, espaço(X1).
+
+triangulo(0,Y).
+triangulo(X,Y):- X1 is X - 1, espaço(X1),A is Y - X, coluna(A), triangulo(X1,Y).
+
+retang(0,C).
+retang(L,C):- coluna(C), L1 is L-1, retang(L1,C).
+
+trapezio(H,BM,B):- A is BM - B, X1 is A + 1, triangulo(X1,X1), retang(B,H).
+
+%?- trapezio(2,7,6).
+% --------------------------------------
+
+% QUESTÃO 5
+
+modcall([],N,[]).
+modcall([H|T],N,[H|R]):- (((mod(H,N)) =:= 0), modcall(T,N,R)). %Like if
+modcall([_|T],N,X):- modcall(T,N,X). %Like elses
+
+%?- modcall([12,13,13,24],1,X).
+%?- modcall([12,15,18,24,31],6,X).
