@@ -3,7 +3,7 @@ _______________________________________________________________________________
 ### Codes developed for the discipline "Applied logic to computing".
 _______________________________________________________________________________
 
-Use  __swipl__ in terminal to execute a file.
+Use  __swipl__ in terminal to execute a prolog file.
 
 Try the comand:
 
