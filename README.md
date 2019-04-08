@@ -3,7 +3,7 @@ _______________________________________________________________________________
 ### Codes developed for the discipline "Applied logic to computing".
 _______________________________________________________________________________
 
-Use  __swipl__ in terminal to execute the codes.
+Use  __swipl__ in terminal to execute a file.
 
 Try the comand:
 
